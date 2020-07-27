@@ -1,0 +1,28 @@
+.badge__container{
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif, Helvetica, sans-serif;
+  font-size: 14px;
+}
+
+.badge__list{
+  display: flex;
+  background-color: azure;
+  padding: 10px;
+  border: 0;
+  border-radius: 7px;
+  box-shadow: 0px 4px 6px rgba(0,0,0,.5);
+  margin-bottom: 10px;
+}
+
+.badge__list-img-avatar{
+  border-radius: 50%;
+  
+}
+.badge__container p{
+  margin:0;
+}
+.badge__firstName{
+font-weight: bold;
+}

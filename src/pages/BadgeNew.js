@@ -1,6 +1,5 @@
 import React from "react";
 import "./styles/BadgeNew.css";
-import NavBar from "../components/NavBar";
 import header from "../images/badge-header.svg";
 import Badge from "../components/Badge";
 import BagdeForm from "../components/BadgeForm";
@@ -16,17 +15,16 @@ class BadgeNew extends React.Component {
 	};
 
 	handleChange = (e) => {
-		const nextForm = this.state.form;
-		nextForm[e.target.name] = e.target.value;
-
 		this.setState({
-			form: nextForm,
+			form: {
+				...this.state.form,
+				[e.target.name]: e.target.value,
+			},
 		});
 	};
 	render() {
 		return (
-			<div>
-				<NavBar />
+			<React.Fragment>
 				<div className="BadgeNew__hero">
 					<img className="img-fluid" src={header} alt="logo" />
 				</div>
@@ -49,7 +47,7 @@ class BadgeNew extends React.Component {
 						</div>
 					</div>
 				</div>
-			</div>
+			</React.Fragment>
 		);
 	}
 }
