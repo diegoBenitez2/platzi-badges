@@ -1,0 +1,13 @@
+.home__container {
+	background: url("../../images/stars.svg") black;
+	background-size: cover;
+	background-repeat: no-repeat;
+	padding: 100px 0;
+}
+.home__title {
+	padding: 0 70px;
+}
+h1,
+h5 {
+	color: white;
+}
