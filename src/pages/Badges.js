@@ -5,54 +5,39 @@ import "./styles/Badges.css";
 import ConfLogo from "../images/badge-header.svg";
 //COMPONENTS
 import BadgeList from "../components/BadgeList";
+import api from "../api";
 
 class Badges extends React.Component {
 	constructor(props) {
+		//inicializa la super clase(Component)
 		super(props);
+		//inicializar estados
 		this.state = {
-			data: [],
+			loading: true,
+			error: null,
+			data: undefined,
 		};
 		console.log("1.constructor");
 	}
+	//se ejecuta cuando se realiza un cambio
 	componentDidMount() {
 		console.log("1.constructor");
-		setTimeout(() => {
-			this.setState({
-				data: [
-					{
-						id: "2de30c42-9deb-40fc-a41f-05e62b5939a7",
-						firstName: "Freda",
-						lastName: "Grady",
-						email: "Leann_Berge@gmail.com",
-						jobTitle: "Legacy Brand Director",
-						twitter: "FredaGrady22221-7573",
-						avatarUrl:
-							"https://www.gravatar.com/avatar/f63a9c45aca0e7e7de0782a6b1dff40b?d=identicon",
-					},
-					{
-						id: "d00d3614-101a-44ca-b6c2-0be075aeed3d",
-						firstName: "Major",
-						lastName: "Rodriguez",
-						email: "Ilene66@hotmail.com",
-						jobTitle: "Human Research Architect",
-						twitter: "MajorRodriguez61545",
-						avatarUrl:
-							"https://www.gravatar.com/avatar/d57a8be8cb9219609905da25d5f3e50a?d=identicon",
-					},
-					{
-						id: "63c03386-33a2-4512-9ac1-354ad7bec5e9",
-						firstName: "Daphney",
-						lastName: "Torphy",
-						email: "Ron61@hotmail.com",
-						jobTitle: "National Markets Officer",
-						twitter: "DaphneyTorphy96105",
-						avatarUrl:
-							"https://www.gravatar.com/avatar/e74e87d40e55b9ff9791c78892e55cb7?d=identicon",
-					},
-				],
-			});
-		}, 3000);
+		//peticion asincrona de datos
+		this.fetchData();
 	}
+	//Funcion asincrona
+	fetchData = async () => {
+		this.setState({ loading: true, error: null });
+		try {
+		//trae un promesa
+			const data = await api.badges.list();
+			this.setState({ loading: false, data: data });
+		} catch (error) {
+			this.setState({ loading: false, error: error });
+		}
+	};
+	//Se utiliza cuando hay una actualizacion y valida
+	//los datos anteriores con los actuales y renderiza de nuevo
 	componentDidUpdate(prevProps, prevState) {
 		console.log("4.componentDidUpdate");
 		console.log({
@@ -64,11 +49,17 @@ class Badges extends React.Component {
 			props: this.props,
 		});
 	}
+	//Se utiliza cuando los componentes salen de escena
+	//y hay un cambio en el DOM
 	componentWillUnmount() {
 		console.log("6.componenWillUnMount");
+		clearTimeout(this.setTimeoutId);
 	}
 	render() {
 		console.log("2/4.Render");
+		if (this.state.loading === true) {
+			return "Loading...";
+		}
 		return (
 			<React.Fragment>
 				<div className="Badges">
