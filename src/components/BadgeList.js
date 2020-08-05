@@ -4,12 +4,12 @@ import { Link } from "react-router-dom";
 
 class BadgeList extends React.Component {
 	render() {
-		if (this.props.badges.length === 0) {
+		if (this.props.badgeList.length === 0) {
 			return (
 				<div>
 					<h3>No Badges were Found</h3>
 					<Link className="btn btn-primary" to="/badges/new">
-						Create a new Badges
+						Create a new Badge
 					</Link>
 				</div>
 			);

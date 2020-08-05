@@ -5,13 +5,15 @@ import "./styles/Badges.css";
 import ConfLogo from "../images/badge-header.svg";
 //COMPONENTS
 import BadgeList from "../components/BadgeList";
+import PageLoading from "../components/PageLoading";
+import PageError from "../components/PageError";
 import api from "../api";
 
 class Badges extends React.Component {
 	constructor(props) {
 		//inicializa la super clase(Component)
 		super(props);
-		//inicializar estados
+		//inicializar estados para peticiones HTTP
 		this.state = {
 			loading: true,
 			error: null,
@@ -29,7 +31,7 @@ class Badges extends React.Component {
 	fetchData = async () => {
 		this.setState({ loading: true, error: null });
 		try {
-		//trae un promesa
+			//trae un promesa
 			const data = await api.badges.list();
 			this.setState({ loading: false, data: data });
 		} catch (error) {
@@ -51,14 +53,17 @@ class Badges extends React.Component {
 	}
 	//Se utiliza cuando los componentes salen de escena
 	//y hay un cambio en el DOM
-	componentWillUnmount() {
-		console.log("6.componenWillUnMount");
-		clearTimeout(this.setTimeoutId);
-	}
+	// componentWillUnmount() {
+	// 	console.log("6.componenWillUnMount");
+	// 	clearTimeout(this.setTimeoutId);
+	// }
 	render() {
 		console.log("2/4.Render");
 		if (this.state.loading === true) {
-			return "Loading...";
+			return <PageLoading />;
+		}
+		if (this.state.error) {
+			return <PageError error={this.state.error} />;
 		}
 		return (
 			<React.Fragment>

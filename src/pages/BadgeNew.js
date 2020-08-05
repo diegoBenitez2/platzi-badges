@@ -1,8 +1,9 @@
 import React from "react";
 import "./styles/BadgeNew.css";
-import header from "../images/badge-header.svg";
+import header from "../images/platziconf-logo.svg";
 import Badge from "../components/Badge";
 import BagdeForm from "../components/BadgeForm";
+import api from "../api";
 class BadgeNew extends React.Component {
 	state = {
 		form: {
@@ -22,27 +23,43 @@ class BadgeNew extends React.Component {
 			},
 		});
 	};
+
+	handleSubmit = async e =>{
+		e.prevenDefault();
+		this.setState({loading: true , error:null})
+		try {
+			await api.badges.create(this.state.form)
+			this.setState({loading: false})
+		} catch (error) {
+			this.setState({loading: false, error: error})
+		}
+	}
 	render() {
 		return (
 			<React.Fragment>
 				<div className="BadgeNew__hero">
-					<img className="img-fluid" src={header} alt="logo" />
+					<img
+						className="BadgeNew__hero-image img-fluid"
+						src={header}
+						alt="logo"
+					/>
 				</div>
 				<div className="container">
 					<div className="row">
 						<div className="col-6">
 							<Badge
-								firstName={this.state.form.FirstName}
-								lastName={this.state.form.LastName}
-								twitter={this.state.form.Twitter}
-								jobTitle={this.state.form.JobTitle}
-								avatar="https://s.gravatar.com/avatar/de86a8a8fc9dac4767cbc9d8b5cf1fbc?s=80"
+								firstName={this.state.form.FirstName || "FIRST_NAME"}
+								lastName={this.state.form.LastName || "LAST_NAME"}
+								twitter={this.state.form.Twitter || "twitter"}
+								jobTitle={this.state.form.JobTitle || "JOB_TITLE"}
+								email={this.state.Email||'Email'}
 							/>
 						</div>
 						<div className="col-6">
 							<BagdeForm
 								onChange={this.handleChange}
 								formValues={this.state.form}
+								onSubmit ={this.handleSubmit}
 							/>
 						</div>
 					</div>
