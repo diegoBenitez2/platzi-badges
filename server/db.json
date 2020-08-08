@@ -440,6 +440,22 @@
       "jobTitle": "Lawyer",
       "twitter": "ckaufmanpr",
       "id": "npaYZKI"
+    },
+    {
+      "firstName": "Diego",
+      "lastName": "Fernando",
+      "email": "diegof.17@hotmail.com",
+      "jobTitle": "Programmer",
+      "twitter": "@diegasso.com",
+      "id": "NF89dJJ"
+    },
+    {
+      "firstName": "Andres",
+      "lastName": "Lopez",
+      "email": "andre@gmail.com",
+      "jobTitle": "web Designer",
+      "twitter": "@al.com",
+      "id": "Gb23b-i"
     }
   ]
 }

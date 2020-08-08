@@ -1,7 +1,7 @@
 import React from "react";
 class BadgeForm extends React.Component {
 	handleClick = (e) => {
-		console.log("Button handleClick");
+		console.log(e);
 	};
 	// handleSubmit = (e) => {
 	// 	e.preventDefault();
@@ -19,17 +19,17 @@ class BadgeForm extends React.Component {
 							onChange={this.props.onChange}
 							className="form-control"
 							type="text"
-							name="FirstName"
-							value={this.props.formValues.FirstName}></input>
+							name="firstName"
+							value={this.props.formValues.firstName}></input>
 					</div>
 					<div className="form-group">
-						<label>LastName</label>
+						<label>Last Name</label>
 						<input
 							onChange={this.props.onChange}
 							className="form-control"
 							type="text"
-							name="LastName"
-							value={this.props.formValues.LastName}></input>
+							name="lastName"
+							value={this.props.formValues.lastName}></input>
 					</div>
 					<div className="form-group">
 						<label>Email</label>
@@ -37,8 +37,8 @@ class BadgeForm extends React.Component {
 							onChange={this.props.onChange}
 							className="form-control"
 							type="email"
-							name="Email"
-							value={this.props.formValues.Email}></input>
+							name="email"
+							value={this.props.formValues.email}></input>
 					</div>
 					<div className="form-group">
 						<label>JobTitle</label>
@@ -46,8 +46,8 @@ class BadgeForm extends React.Component {
 							onChange={this.props.onChange}
 							className="form-control"
 							type="text"
-							name="JobTitle"
-							value={this.props.formValues.JobTitle}></input>
+							name="jobTitle"
+							value={this.props.formValues.jobTitle}></input>
 					</div>
 					<div className="form-group">
 						<label>Twitter</label>
@@ -55,16 +55,19 @@ class BadgeForm extends React.Component {
 							onChange={this.props.onChange}
 							className="form-control"
 							type="text"
-							name="Twitter"
-							value={this.props.formValues.Twitter}></input>
+							name="twitter"
+							value={this.props.formValues.twitter}></input>
 					</div>
+					<button
+						type="submit"
+						onClick={this.handleClick}
+						className="btn btn-primary">
+						Save
+					</button>
+					{this.props.error && (
+						<p className="text-danger">{this.props.error.message}</p>
+					)}
 				</form>
-				<button
-					type="submit"
-					onClick={this.handleClick}
-					className="btn btn-primary">
-					Save
-				</button>
 			</React.Fragment>
 		);
 	}

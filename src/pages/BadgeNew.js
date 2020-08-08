@@ -4,14 +4,17 @@ import header from "../images/platziconf-logo.svg";
 import Badge from "../components/Badge";
 import BagdeForm from "../components/BadgeForm";
 import api from "../api";
+import PageLoading from "../components/PageLoading";
 class BadgeNew extends React.Component {
 	state = {
+		loading: false,
+		error: null,
 		form: {
-			FirstName: "",
-			LastName: "",
-			Email: "",
-			JobTitle: "",
-			Twitter: "",
+			firstName: "",
+			lastName: "",
+			email: "",
+			jobTitle: "",
+			twitter: "",
 		},
 	};
 
@@ -24,17 +27,22 @@ class BadgeNew extends React.Component {
 		});
 	};
 
-	handleSubmit = async e =>{
-		e.prevenDefault();
-		this.setState({loading: true , error:null})
+	handleSubmit = async (e) => {
+		e.preventDefault();
+		this.setState({ loading: true, error: null });
 		try {
-			await api.badges.create(this.state.form)
-			this.setState({loading: false})
+			await api.badges.create(this.state.form);
+			this.setState({ loading: false });
+			// busca en el historia una pagina en especifico
+			this.props.history.push("/badges");
 		} catch (error) {
-			this.setState({loading: false, error: error})
+			this.setState({ loading: false, error: error });
 		}
-	}
+	};
 	render() {
+		if (this.state.loading === true) {
+			return <PageLoading />;
+		}
 		return (
 			<React.Fragment>
 				<div className="BadgeNew__hero">
@@ -48,18 +56,19 @@ class BadgeNew extends React.Component {
 					<div className="row">
 						<div className="col-6">
 							<Badge
-								firstName={this.state.form.FirstName || "FIRST_NAME"}
-								lastName={this.state.form.LastName || "LAST_NAME"}
-								twitter={this.state.form.Twitter || "twitter"}
-								jobTitle={this.state.form.JobTitle || "JOB_TITLE"}
-								email={this.state.Email||'Email'}
+								firstName={this.state.form.firstName || "FIRST_NAME"}
+								lastName={this.state.form.lastName || "LAST_NAME"}
+								twitter={this.state.form.twitter || "TWITTER"}
+								jobTitle={this.state.form.jobTitle || "JOB_TITLE"}
+								email={this.state.form.email || "EMAIL"}
 							/>
 						</div>
 						<div className="col-6">
 							<BagdeForm
 								onChange={this.handleChange}
 								formValues={this.state.form}
-								onSubmit ={this.handleSubmit}
+								onSubmit={this.handleSubmit}
+								error={this.state.error}
 							/>
 						</div>
 					</div>
