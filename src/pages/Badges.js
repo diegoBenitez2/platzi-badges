@@ -7,6 +7,7 @@ import ConfLogo from "../images/badge-header.svg";
 import BadgeList from "../components/BadgeList";
 import PageLoading from "../components/PageLoading";
 import PageError from "../components/PageError";
+import MiniLoader from "../components/MiniLoader";
 import api from "../api";
 
 class Badges extends React.Component {
@@ -26,6 +27,9 @@ class Badges extends React.Component {
 		console.log("1.constructor");
 		//peticion asincrona de datos
 		this.fetchData();
+	// cada cierto timpo busquemos los dato sy los actualizamos 
+	// sta que salga de la pagina interval
+		this.intervalId = setInterval(this.fetchData, 5000)
 	}
 	//Funcion asincrona
 	fetchData = async () => {
@@ -40,26 +44,28 @@ class Badges extends React.Component {
 	};
 	//Se utiliza cuando hay una actualizacion y valida
 	//los datos anteriores con los actuales y renderiza de nuevo
-	componentDidUpdate(prevProps, prevState) {
-		console.log("4.componentDidUpdate");
-		console.log({
-			prevProps: prevProps,
-			prevState: prevState,
-		});
-		console.log({
-			state: this.state,
-			props: this.props,
-		});
-	}
+	// componentDidUpdate(prevProps, prevState) {
+	// 	console.log("4.componentDidUpdate");
+	// 	console.log({
+	// 		prevProps: prevProps,
+	// 		prevState: prevState,
+	// 	});
+	// 	console.log({
+	// 		state: this.state,
+	// 		props: this.props,
+	// 	});
+	// }
+
+	
 	//Se utiliza cuando los componentes salen de escena
 	//y hay un cambio en el DOM
-	// componentWillUnmount() {
-	// 	console.log("6.componenWillUnMount");
-	// 	clearTimeout(this.setTimeoutId);
-	// }
+	componentWillUnmount(){
+		clearInterval (this.intervalId)
+	}
+	//
 	render() {
 		console.log("2/4.Render");
-		if (this.state.loading === true) {
+		if (this.state.loading === true && !this.state.data ) {
 			return <PageLoading />;
 		}
 		if (this.state.error) {
@@ -83,6 +89,7 @@ class Badges extends React.Component {
 					<div className="Badges__List">
 						<div className="Badge__container">
 							<BadgeList badgeList={this.state.data} />
+							{this.state.loading && <MiniLoader/>}
 						</div>
 					</div>
 				</div>
