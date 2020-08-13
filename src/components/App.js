@@ -2,8 +2,8 @@ import React from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import HomeBadges from "../pages/HomeBadges";
 import BadgeNew from "../pages/BadgeNew";
-import BadgeDetails from "../pages/{BadgeDetails";
-import BadgeEdit from "../pages/{BadgeEdit";
+import BadgeDetails from "../pages/BadgeDetails";
+import BadgeEdit from "../pages/BadgeEdit";
 import Badges from "../pages/Badges";
 import Layout from "../components/Layout";
 import NotFound from "../pages/NotFound";
@@ -22,7 +22,7 @@ function App() {
 				</Switch>
 			</Layout>
 		</BrowserRouter>
-	);	
+	);
 }
 
 export default App;
