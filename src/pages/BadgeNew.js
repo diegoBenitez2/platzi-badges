@@ -64,7 +64,7 @@ class BadgeNew extends React.Component {
 							/>
 						</div>
 						<div className="col-6">
-						<h1 className="text-dark">New Attenndant</h1>
+							<h1 className="text-dark">New Attenndant</h1>
 							<BagdeForm
 								onChange={this.handleChange}
 								formValues={this.state.form}
