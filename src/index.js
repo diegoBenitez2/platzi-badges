@@ -10,4 +10,4 @@ import App from "./components/App";
 const container = document.getElementById("app");
 
 // ReactDOM.render(<BadgeNew />, container);
-ReactDOM.render(<App />, container);
+ReactDOM.render(<App/>, container);
